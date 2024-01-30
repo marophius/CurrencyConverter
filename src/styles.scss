@@ -1,1 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+$font-family-primary: 'Poppins', sans-serif;
+$font-family-secondary: Arial, sans-serif;
+// colors variables
+$app-background: #EEEEEE;
+$app-header: #FFFFFF;
+$text-basic: #717171;
+$text-secondary: #919191;
+$text-green: #3C7649;
+$text-blue: #3684CB;
+$text-red: #DD4B4B;
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: $font-family-primary;
+    background-color: $app-background;
+}

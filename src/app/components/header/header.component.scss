@@ -1,0 +1,13 @@
+@import '../../../styles.scss';
+header{
+    height: 100px;
+    background-color:$app-header;
+    width: 100dvw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header > img {
+    max-height: 80%;
+}
