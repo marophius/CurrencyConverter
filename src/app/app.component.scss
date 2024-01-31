@@ -3,20 +3,40 @@ main.container {
     display: flex;
 }
 
-@media (min-width: 768px) {
+@media(min-width: 768px) {
+    main.container {
+        margin-top: 15dvh;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 0 10px 0 10px;
+    }
+}
+
+@media(min-width: 992px) {
+    main.container {
+        margin-top: 15dvh;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 0 10px 0 10px;
+    }
+}
+
+@media(min-width: 1200px) {
     main.container {
         margin-top: 25dvh;
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        padding: 0 10dvw 0 10dvw;
+        padding: 0 10% 0 10%;
     }
 }
 
 @media (max-width:576px) {
     main.container {
         margin-top: 20dvh;
-        width: 100%;
+        width: 95%;
         flex-direction: column;
         justify-content: center;
         align-items: center;
