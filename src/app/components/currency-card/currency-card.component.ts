@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, Input, Output, inject } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { ICurrency } from '../../models/currency';
 import { CurrencyDirective } from '../../directives/currency.directive';
 import { CommonModule } from '@angular/common';
@@ -18,7 +18,8 @@ import { LoadingService } from '../../services/loading.service';
     BeforeBarPipe
   ],
   templateUrl: './currency-card.component.html',
-  styleUrl: './currency-card.component.scss'
+  styleUrl: './currency-card.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CurrencyCardComponent  {
 

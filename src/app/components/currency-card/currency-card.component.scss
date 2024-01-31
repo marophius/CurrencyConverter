@@ -3,10 +3,23 @@ $card-header: #f6f6f6;
 $card-background: #ffffff;
 $button-background: #f4f4f4;
 
+@media(max-width: 540px) {
+    div.card {
+        width: 350px;
+        margin: 30px;
+    }
+}
+
+@media(min-width: 768px) {
+    div.card {
+        width: 430px;
+        height: 430px;
+        margin: 10px;
+    }
+}
+
 div.card {
-    width: 430px;
-    height: 430px;
-    margin: 10px;
+
     border-radius: 10px;
     box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.15);
     background-color: $card-background;

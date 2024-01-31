@@ -9,6 +9,7 @@ import { Subscription, switchMap, tap, timer } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { ICurrency } from './models/currency';
 import { LoadingService } from './services/loading.service';
+import { DataStorageService } from './services/data-storage.service';
 
 @Component({
   selector: 'app-root',
@@ -32,6 +33,7 @@ export class AppComponent implements OnInit, OnDestroy{
   public currenciesSignal: WritableSignal<ICurrency[]> = signal<ICurrency[]>([]);
   private loadingService: LoadingService = inject(LoadingService);
   public subscription!: Subscription;
+  private dataStorageService: DataStorageService = inject(DataStorageService);
 
 
   constructor() {
@@ -48,15 +50,35 @@ export class AppComponent implements OnInit, OnDestroy{
       switchMap(() => this.currencyService.getCurrencyData()),
       tap({
         next: (res: ICurrency[]) => {
-          this.currenciesSignal.set(res);
-          console.log(res);
+          const currentTime = new Date();
+          const cacheTime = 180000
+          const cachedData = this.dataStorageService.checkStorage() as ICurrency[];
+          if(!this.isCacheValid(cachedData, currentTime, cacheTime)){
+            this.dataStorageService.clearData();
+            this.currenciesSignal.set(res);
+            this.dataStorageService.setData(res);
+            console.log(res);
+          }else {
+            this.currenciesSignal.set(cachedData);
+          }
         },
         error: (error: Error) => console.log(error)
       })
     ).subscribe();
   }
 
+  private isCacheValid(data: ICurrency[], currentTime: Date, cacheTime: number) {
+    if (!data || data.length === 0) {
+      return false;
+    }
+  
+    const lastUpdatedTime = new Date(data[0].lastUpdate);
+    const wastedTime = currentTime.getTime() - lastUpdatedTime.getTime()
+    return  wastedTime <= cacheTime;
+  }
+
   ngOnDestroy(): void {
       this.subscription.unsubscribe();
+      this.dataStorageService.clearData();
   }
 }
