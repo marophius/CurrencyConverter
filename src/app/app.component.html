@@ -1,6 +1,8 @@
 <app-header></app-header>
 <main class="container">
-  <app-currency-card>
-    
-  </app-currency-card>
+  @for(curr of currenciesSignal(); track $index) {
+    <app-currency-card [currency]="curr" (reload)="this.getCurrencies()">
+
+    </app-currency-card>
+  }
 </main>

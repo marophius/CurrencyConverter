@@ -2,10 +2,26 @@
 header{
     height: 100px;
     background-color:$app-header;
-    width: 100dvw;
+
     display: flex;
     justify-content: center;
     align-items: center;
+    position: fixed;
+    top: 0;
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.15);
+}
+
+@media(min-width: 768px) {
+    header {
+        width: 100dvw;
+        overflow-x:hidden;
+    }
+}
+
+@media(max-width: 576px) {
+    header {
+        width: 100%;
+    }
 }
 
 header > img {

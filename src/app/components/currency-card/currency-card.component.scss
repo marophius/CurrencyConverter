@@ -9,6 +9,7 @@ div.card {
     margin: 10px;
     border-radius: 10px;
     box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.15);
+    background-color: $card-background;
 }
 
 div.card > header.card-header {
@@ -32,6 +33,40 @@ div.card > main.card-body {
     width: 100%;
     height: 200px;
     border-bottom: 1px solid #cfcfcf;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+main.card-body > h2 {
+    font-size: 64px;
+    text-align: center;
+}
+
+main.error {
+    flex-direction: column;
+    border: none !important;
+}
+
+main.loading {
+    border: none !important;
+}
+
+main.error > span {
+    font-size: 26px;
+    color: $text-basic;
+}
+
+main.error > button.reload {
+    width: 173px;
+    height: 58px;
+    background-color: $card-header;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    color: $text-basic;
 }
 
 div.card > footer.card-footer {
@@ -46,6 +81,28 @@ footer.card-footer > section {
     width: 50%;
 }
 
+section {
+    display: flex;
+    justify-content: center;
+}
+
 section.fluctuation {
     border-right: 1px solid #cfcfcf;
+}
+
+section > div {
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+section > div > span {
+    font-weight: 600;
+    color: $text-secondary;
+}
+
+section > div > span:last-child {
+    color: $text-basic;
 }

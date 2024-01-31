@@ -1,16 +1,42 @@
 <div class="card">
-    <header class="card-header">
-        <h3 class="currency-name">Dólar Canadense</h3>
-    </header>
-    <main class="card-body">
-
-    </main>
-    <footer class="card-footer">
-        <section class="fluctuation">
-
-        </section>
-        <section class="update">
-            
-        </section>
-    </footer>
+    
+    @if(isLoading|async){
+        <header class="card-header">
+            <h3 class="currency-name">Aguarde</h3>
+        </header>
+        <main class="card-body loading">
+            <svg width='150px' height='150px' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" class="uil-ring-alt"><rect x="0" y="0" width="100" height="100" fill="none" class="bk"></rect><circle cx="50" cy="50" r="40" stroke="rgba(255,255,255,0)" fill="none" stroke-width="10" stroke-linecap="round"></circle><circle cx="50" cy="50" r="40" stroke="#737c84" fill="none" stroke-width="6" stroke-linecap="round"><animate attributeName="stroke-dashoffset" dur="1.5s" repeatCount="indefinite" from="0" to="502"></animate><animate attributeName="stroke-dasharray" dur="1.5s" repeatCount="indefinite" values="188.25 62.75;1 250;188.25 62.75"></animate></circle></svg>
+        </main>
+    }
+    @else if (currency == undefined) {
+        <header class="card-header">
+            <h3 class="currency-name">Tente novamente</h3>
+        </header>
+        <main class="card-body error">
+            <span>Algo deu errado</span>
+            <button class="reload"(click)="this.reload.emit()">Recarregar</button>
+        </main>
+    }
+    @else {
+        <header class="card-header">
+            <h3 class="currency-name">{{currency.name | beforeBar}}</h3>
+        </header>
+        <main class="card-body">
+            <h2 appCurrency [valor]="currency.bid">{{currency.bid | currency:'BRL'}}</h2>
+        </main>
+        <footer class="card-footer">
+            <section class="fluctuation">
+                <div>
+                    <span>Variação(%)</span>
+                    <span>{{currency.varBid | number:'1.2-2'}}</span>
+                </div>
+            </section>
+            <section class="update">
+                <div>
+                    <span>Atualizado</span>
+                    <span>{{currency.lastUpdate | date:'HH:mm:ss'}}</span>
+                </div>
+            </section>
+        </footer>
+    }
 </div>
