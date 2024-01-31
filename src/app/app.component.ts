@@ -31,7 +31,7 @@ export class AppComponent implements OnInit, OnDestroy{
   private currencyService: CurrencyService = inject(CurrencyService);
   public currenciesSignal: WritableSignal<ICurrency[]> = signal<ICurrency[]>([]);
   private loadingService: LoadingService = inject(LoadingService);
-  private subscription!: Subscription;
+  public subscription!: Subscription;
 
 
   constructor() {

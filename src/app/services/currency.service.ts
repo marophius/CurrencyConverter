@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Observable, catchError, map, tap } from 'rxjs';
+import { Observable, catchError, map, tap, throwError } from 'rxjs';
 import { ICurrency } from '../models/currency';
 import { LoadingService } from './loading.service';
 
@@ -34,6 +34,9 @@ export class CurrencyService {
         })
 
         return currencyArr;
+      }),
+      catchError((error: HttpErrorResponse) => {
+        return throwError(error);
       }),
       tap(() => {
         this.loading.setLoading(false)
