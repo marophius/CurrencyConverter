@@ -23,7 +23,7 @@ O smart component é o nome que se dá ao componente dentro do contexto de arqui
 
 ### Dumb Component
 
-Outro conceito também da arquitetura baseada em componentes é o Dumb Component, que não possui um estado próprio, ele recebe dados que vem de componentes inteligentes, utilizar essa estratégia dentro do angular pode trazer benefícios como a possibilidade do uso de detecção de mudanças "OnPush" que amplifica a performance da aplicação, pois ela não terá que checar mudanças a todo o momento, apenas quando houverem mudanças nos inputs e outputs do component. Por issso nosso componente burro é o CurrencyCardComponent que vai receber dados do AppComponent(SmartComponent) através de inputs.
+- Outro conceito também da arquitetura baseada em componentes é o Dumb Component, que não possui um estado próprio, ele recebe dados que vem de componentes inteligentes, utilizar essa estratégia dentro do angular pode trazer benefícios como a possibilidade do uso de detecção de mudanças "OnPush" que amplifica a performance da aplicação, pois ela não terá que checar mudanças a todo o momento, apenas quando houverem mudanças nos inputs e outputs do component. Por issso nosso componente burro é o CurrencyCardComponent que vai receber dados do AppComponent(SmartComponent) através de inputs.
 
 ### Diretivas e Pipes
 
