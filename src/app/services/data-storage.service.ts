@@ -25,7 +25,6 @@ export class DataStorageService {
       this.localStorage.set('data', currencies)
       return true;
     }catch(error) {
-      console.log(error);
       return false;
     }
   }

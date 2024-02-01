@@ -1,27 +1,54 @@
 # CurrencyConverter
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.6.
+## Sobre o projeto
 
-## Development server
+CurrencyConverter é uma aplicação angular cuja finalidade é verificar periodicamente se houve variações na cotação do Dólar Canadense(CAD), Peso Argentindo(ARS) e Libra Esterlina(GBP). Desenvolvido para ser reativo e responsivo, possuindo componentes que mudam seu estado de acordo com o carregamento dos dados.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### Tecnologias utilizadas
+- Typescript
+- Angular 17
+- Docker
+- Jasmine
+- Visual Studio Code
 
-## Code scaffolding
+### Arquitetura
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Desenvolvido tendo como base uma arquitetura baseada em componentes, os componentes desse projeto são independentes para que seja possível reutilizar código, melhorar a testabilidade, ser flexível entre outras coisas.
 
-## Build
+### Smart Component
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+O smart component é o nome que se dá ao componente dentro do contexto de arquitetura baseada em componentes ao componente que é responsável por gerenciar estados, manipular lógica e interagir com serviços externos. No CurrencyConverter, o AppComponent é o nosso smart component.
 
-## Running unit tests
+### Dumb Component
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Outro conceito também da arquitetura baseada em componentes é o Dumb Component, que não possui um estado próprio, ele recebe dados que vem de componentes inteligentes, utilizar essa estratégia dentro do angular pode trazer benefícios como a possibilidade do uso de detecção de mudanças "OnPush" que amplifica a performance da aplicação, pois ela não terá que checar mudanças a todo o momento, apenas quando houverem mudanças nos inputs e outputs do component. Por issso nosso componente burro é o CurrencyCardComponent que vai receber dados do AppComponent(SmartComponent) através de inputs.
 
-## Running end-to-end tests
+### Diretivas e Pipes
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Visando separar responsabilidades e seguir boas práticas, uma diretiva foi criada para fazer alterações na DOM caso o valor das cotações se alterem e um pipe foi criado para deixar o nome da moeda como queremos.
 
-## Further help
+### Suporte ao Docker
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Caso queira ver a aplicação usando o docker você tem duas opções:
+#### Opção 1:
+- git clone https://github.com/marophius/CurrencyConverter.git
+- Vá até a pasta onde o projeto se encontra, abra um terminal e escreva: "docker build -t currency-converter ."
+- O comando acima irá construir uma imagem docker para que você possa rodar containers a partir dela.
+- Após o fim da construção da imagem volte ao terminal e digite: "docker run -d -p 4200:80 currency-converter"
+
+#### Opção 2 
+Com o docker instalado no computador digite:
+- docker pull marophius/currency-converter:latest
+Em seguida digite o comando:
+- "docker run -d -p 4200:80 marophius/currency-converter"
+
+### Rodando o projeto localmente
+Após baixar o projeto abra um terminal na pasta em que o projeto se encontra em seu computador e:
+- Use o comando "npm i" para instalar as dependências
+Após finalizar a instalação de dependências:
+- Use o comando "ng serve" para rodar a aplicação.
+- Abra seu navegador na porta 4200
+
+### Testes
+
+Testes foram feitos utilizando Jasmine, priorizando as partes mais importantes da aplicação.

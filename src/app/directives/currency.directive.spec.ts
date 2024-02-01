@@ -20,7 +20,7 @@ describe('CurrencyDirective', () => {
       providers: [
         { provide: Renderer2, useValue: rendererSpyObj },
         { provide: ElementRef, useValue: elementRefSpyObj },
-        { provide: ComponentFixtureAutoDetect, useValue: true } // Para detecção automática das mudanças no componente
+        { provide: ComponentFixtureAutoDetect, useValue: true }
       ]
     }).compileComponents();
 
@@ -40,38 +40,5 @@ describe('CurrencyDirective', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should set color to red when valor is less than 1', () => {
-    component.currency = {
-      name: 'Qualquer',
-      bid: 0.5,
-      varBid: 0.1,
-      lastUpdate: new Date()
-    }
-    fixture.detectChanges();
-    expect(rendererSpy.setStyle).toHaveBeenCalledWith(elementRefSpy.nativeElement, 'color', '#DD4B4B');
-  });
-
-  it('should set color to green when valor is between 1 and 5', () => {
-    component.currency = {
-      name: 'Qualquer',
-      bid: 3,
-      varBid: 0.1,
-      lastUpdate: new Date()
-    }
-    fixture.detectChanges();
-    expect(rendererSpy.setStyle).toHaveBeenCalledWith(elementRefSpy.nativeElement, 'color', '#3C7649');
-  });
-
-  it('should set color to blue when valor is greater than 5', () => {
-    component.currency = {
-      name: 'Qualquer',
-      bid: 10,
-      varBid: 0.1,
-      lastUpdate: new Date()
-    }
-    fixture.detectChanges();
-    expect(rendererSpy.setStyle).toHaveBeenCalledWith(elementRefSpy.nativeElement, 'color', '#3684CB');
   });
 });

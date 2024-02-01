@@ -75,7 +75,6 @@ describe('CurrencyService', () => {
     service.getCurrencyData().subscribe(data => {
       expect(data.length).toBe(Object.keys(mockResponse).length);
 
-      // Check if the LoadingService setLoading method was called
       expect(loadingServiceSpy.setLoading).toHaveBeenCalledWith(false);
       
       done();

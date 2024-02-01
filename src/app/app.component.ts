@@ -57,7 +57,6 @@ export class AppComponent implements OnInit, OnDestroy{
             this.dataStorageService.clearData();
             this.currenciesSignal.set(res);
             this.dataStorageService.setData(res);
-            console.log(res);
           }else {
             this.currenciesSignal.set(cachedData);
           }
