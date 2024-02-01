@@ -51,5 +51,8 @@ Após finalizar a instalação de dependências:
 - Abra seu navegador na porta 4200
 
 ### Imagens
+![Desktop](https://github.com/marophius/CurrencyConverter/assets/52643566/1db3ca84-e251-48bf-82ac-8a71accff154)
+
+![mobile](https://github.com/marophius/CurrencyConverter/assets/52643566/05e648ca-cafe-4701-a9b4-6210d8b423d4)
 
 
