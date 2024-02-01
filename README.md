@@ -17,7 +17,7 @@ Desenvolvido tendo como base uma arquitetura baseada em componentes, os componen
 
 ### Smart Component
 
-O smart component é o nome que se dá ao componente dentro do contexto de arquitetura baseada em componentes ao componente que é responsável por gerenciar estados, manipular lógica e interagir com serviços externos. No CurrencyConverter, o AppComponent é o nosso smart component.
+- O smart component é o nome que se dá ao componente dentro do contexto de arquitetura baseada em componentes ao componente que é responsável por gerenciar estados, manipular lógica e interagir com serviços externos. No CurrencyConverter, o AppComponent é o nosso smart component.
 
 - Os dados são trazidos através de um serviço que consulta a API e converte os objetos em objetos do tipo ICurrency, utilizamos um observable timer para criar uma sequência observável que consulta a API a cada 3 minutos.
 
