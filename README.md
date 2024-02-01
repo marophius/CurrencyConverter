@@ -17,7 +17,9 @@ Desenvolvido tendo como base uma arquitetura baseada em componentes, os componen
 
 ### Smart Component
 
-O smart component é o nome que se dá ao componente dentro do contexto de arquitetura baseada em componentes ao componente que é responsável por gerenciar estados, manipular lógica e interagir com serviços externos. No CurrencyConverter, o AppComponent é o nosso smart component.
+- O smart component é o nome que se dá ao componente dentro do contexto de arquitetura baseada em componentes ao componente que é responsável por gerenciar estados, manipular lógica e interagir com serviços externos. No CurrencyConverter, o AppComponent é o nosso smart component.
+
+- Os dados são trazidos através de um serviço que consulta a API e converte os objetos em objetos do tipo ICurrency, utilizamos um observable timer para criar uma sequência observável que consulta a API a cada 3 minutos.
 
 ### Dumb Component
 
@@ -39,8 +41,7 @@ Caso queira ver a aplicação usando o docker você tem duas opções:
 #### Opção 2 
 Com o docker instalado no computador digite:
 - docker pull marophius/currency-converter:latest
-Em seguida digite o comando:
-- "docker run -d -p 4200:80 marophius/currency-converter"
+- docker run -d -p 4200:80 marophius/currency-converter
 
 ### Rodando o projeto localmente
 Após baixar o projeto abra um terminal na pasta em que o projeto se encontra em seu computador e:
@@ -49,6 +50,6 @@ Após finalizar a instalação de dependências:
 - Use o comando "ng serve" para rodar a aplicação.
 - Abra seu navegador na porta 4200
 
-### Testes
+### Imagens
 
-Testes foram feitos utilizando Jasmine, priorizando as partes mais importantes da aplicação.
+
