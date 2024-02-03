@@ -6,7 +6,6 @@ import { CurrencyCardComponent } from './components/currency-card/currency-card.
 import { HttpClientModule } from '@angular/common/http';
 import { CurrencyService } from './services/currency.service';
 import { Subscription, switchMap, tap, timer } from 'rxjs';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { ICurrency } from './models/currency';
 import { LoadingService } from './services/loading.service';
 import { DataStorageService } from './services/data-storage.service';
@@ -34,10 +33,21 @@ export class AppComponent implements OnInit, OnDestroy{
   private loadingService: LoadingService = inject(LoadingService);
   public subscription!: Subscription;
   private dataStorageService: DataStorageService = inject(DataStorageService);
-
+  private _startDue: number = 0;
+  private _cacheTime: number = 180000;
 
   constructor() {
-    
+    let currentDate = new Date();
+    let arr = this.dataStorageService.checkStorage();
+    if(arr) {
+      let lastDate = new Date(arr[0].lastUpdate);
+      this._startDue = (lastDate.getTime() + this._cacheTime) - currentDate.getTime();
+      if(this._startDue >= this._cacheTime) 
+        this._startDue = 0;
+      else {
+        this.currenciesSignal.set(arr);
+      }
+    }
   }
 
   ngOnInit(): void {
@@ -45,39 +55,21 @@ export class AppComponent implements OnInit, OnDestroy{
   }
 
   public getCurrencies() {
-    this.loadingService.setLoading(true);
-    this.subscription = timer(0, 180000).pipe(
+    this.subscription = timer(this._startDue, this._cacheTime).pipe(
+      tap(() => this.loadingService.setLoading(true)),
       switchMap(() => this.currencyService.getCurrencyData()),
       tap({
         next: (res: ICurrency[]) => {
-          const currentTime = new Date();
-          const cacheTime = 180000
-          const cachedData = this.dataStorageService.checkStorage() as ICurrency[];
-          if(!this.isCacheValid(cachedData, currentTime, cacheTime)){
-            this.dataStorageService.clearData();
-            this.currenciesSignal.set(res);
-            this.dataStorageService.setData(res);
-          }else {
-            this.currenciesSignal.set(cachedData);
-          }
+          this.dataStorageService.clearData();
+          this.currenciesSignal.set(res);
+          this.dataStorageService.setData(res);
         },
         error: (error: Error) => console.log(error)
       })
     ).subscribe();
   }
 
-  private isCacheValid(data: ICurrency[], currentTime: Date, cacheTime: number) {
-    if (!data || data.length === 0) {
-      return false;
-    }
-  
-    const lastUpdatedTime = new Date(data[0].lastUpdate);
-    const wastedTime = currentTime.getTime() - lastUpdatedTime.getTime()
-    return  wastedTime <= cacheTime;
-  }
-
   ngOnDestroy(): void {
       this.subscription.unsubscribe();
-      this.dataStorageService.clearData();
   }
 }
